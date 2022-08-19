@@ -1,0 +1,267 @@
+openapi: 3.0.1
+info:
+  title: Jobs related API
+  description: Jobs API
+  contact:
+    name: Poojan Shah
+    email: pvs09747@email.com
+  version: v2
+servers:
+- url: https://jobsapis.herokuapp.com/
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+            example:
+              name: bumrah
+              email: boom@gmail.com
+              password: fastbowl
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+      
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login User
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUserRequest'
+            example:
+              email: sunnyg@gmail.com
+              password: gavaskarbat
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+      
+  /jobs:
+    post:
+      tags:
+      - Jobs
+      summary: Create Job
+      operationId: CreateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateJobRequest'
+            example:
+              company: perthscorcher
+              position: ceo
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+
+    get:
+      tags:
+      - Jobs
+      summary: Get All Jobs
+      operationId: GetAllJobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  
+
+
+  /jobs/{id}: 
+    get: 
+      tags:
+      - Single Job 
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema: 
+            type: string
+      description: The Job ID 
+      
+      summary: Get Single Job 
+      operationId: GetSingleJob     
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    
+    
+    patch:
+      tags:
+      - Single Job
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema: 
+            type: string
+      description: The Job ID 
+      
+      summary: Update Job
+      operationId: UpdateJob
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateJobRequest'
+            example:
+              company: arsenal
+              position: footballer
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+
+    delete:
+      tags:
+      - Single Job
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema: 
+            type: string
+      description: The Job ID       
+      
+      summary: Delete Job
+      operationId: DeleteJob
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: bumrah
+        email: boom@gmail.com
+        password: fastbowl
+    LoginUserRequest:
+      title: LoginUserRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: sunnyg@gmail.com
+        password: gavaskarbat
+    CreateJobRequest:
+      title: CreateJobRequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: perthscorcher
+        position: ceo
+    UpdateJobRequest:
+      title: UpdateJobRequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: arsenal
+        position: footballer
+    DeleteJobRequest:
+      title: DeleteJobRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: jayesh
+        email: jay@gmail.com
+        password: fun
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Auth
+  description: ''
+- name: Jobs
+  description: ''
+- name: Single Job
+  description: ''
