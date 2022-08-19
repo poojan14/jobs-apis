@@ -1,3 +1,1 @@
-Live Demo:
-
-https://jobs-pvs.herokuapp.com/
+Live Demo: https://jobs-pvs.herokuapp.com/
